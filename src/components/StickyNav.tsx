@@ -22,36 +22,36 @@ const Nav = styled.nav<{ $visible: boolean }>`
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  background: rgba(30, 39, 97, 0.92);
+  background: #FFFFFF;
   backdrop-filter: blur(12px);
   border-radius: 40px;
   padding: 6px 10px;
   display: flex;
   gap: 4px;
-  box-shadow: 0 4px 24px rgba(30, 39, 97, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid #E2E8F0;
   transition: opacity 0.3s ease;
   opacity: ${(p) => (p.$visible ? 1 : 0)};
   pointer-events: ${(p) => (p.$visible ? 'all' : 'none')};
 `;
 
 const NavItem = styled.button<{ $active: boolean }>`
-  background: ${(p) => (p.$active ? theme.colors.ambar : 'transparent')};
-  color: ${(p) => (p.$active ? theme.colors.azulEscuro : 'rgba(255,255,255,0.75)')};
+  background: ${(p) => (p.$active ? theme.colors.azulEscuro : 'transparent')};
+  color: ${(p) => (p.$active ? '#FFFFFF' : theme.colors.cinzaEscuro)};
   border: none;
   cursor: pointer;
   padding: 5px 14px;
   border-radius: 20px;
   font-size: 11px;
-  font-weight: ${(p) => (p.$active ? 800 : 500)};
+  font-weight: ${(p) => (p.$active ? 700 : 500)};
   letter-spacing: 0.3px;
   font-family: ${theme.fonts.body};
   transition: all 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    background: ${(p) => (p.$active ? theme.colors.ambar : 'rgba(255,255,255,0.12)')};
-    color: ${(p) => (p.$active ? theme.colors.azulEscuro : 'white')};
+    background: ${(p) => (p.$active ? theme.colors.azulEscuro : '#F0F2F5')};
+    color: ${(p) => (p.$active ? '#FFFFFF' : theme.colors.preto)};
   }
 `;
 

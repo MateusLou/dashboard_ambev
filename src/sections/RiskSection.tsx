@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell,
 } from 'recharts';
-import type { TooltipProps } from 'recharts';
+type TooltipProps<_T, _N> = { active?: boolean; payload?: Array<{ value?: number; payload?: unknown }>; label?: string };
 import { theme } from '../styles/theme';
 import { SectionTitle } from '../components/SectionTitle';
 import { biasData, doiSubregioes, riskData } from '../data/caseData';
@@ -27,7 +27,7 @@ const Grid = styled.div`
 `;
 
 const BiasCard = styled.div`
-  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+  background: rgba(45, 212, 191, 0.06);
   border: 2px solid ${theme.colors.ambar};
   border-radius: ${theme.radius.md};
   padding: ${theme.spacing.md};
@@ -37,7 +37,7 @@ const BiasCard = styled.div`
 const BiasTitle = styled.div`
   font-size: 13px;
   font-weight: 700;
-  color: #7c5200;
+  color: ${theme.colors.ambar};
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -48,9 +48,9 @@ const BiasRow = styled.div`
   justify-content: space-between;
   font-size: 12px;
   padding: 4px 0;
-  color: #5a3e00;
+  color: ${theme.colors.cinzaEscuro};
 
-  strong { color: #3d2900; }
+  strong { color: ${theme.colors.preto}; }
 `;
 
 const ContingenciaList = styled.div`
@@ -60,12 +60,12 @@ const ContingenciaList = styled.div`
 `;
 
 const ContingenciaItem = styled.div`
-  background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
-  border-left: 3px solid ${theme.colors.azulEscuro};
+  background: rgba(30, 41, 59, 0.6);
+  border-left: 3px solid ${theme.colors.ambar};
   border-radius: 0 8px 8px 0;
   padding: 10px 14px;
   font-size: 12px;
-  color: ${theme.colors.azulEscuro};
+  color: ${theme.colors.cinzaEscuro};
   line-height: 1.5;
 `;
 
@@ -78,7 +78,7 @@ const RiskCardGrid = styled.div`
 const RiskCard = styled.div`
   border-radius: ${theme.radius.md};
   padding: ${theme.spacing.md};
-  border: 1px solid #eee;
+  border: 1px solid ${theme.colors.cinzaMedio};
 `;
 
 const RiskHeader = styled.div`
@@ -128,7 +128,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     const entry = payload[0]?.payload as { subregiao: string } | undefined;
     return (
-      <div style={{ background: 'white', border: '1px solid #eee', borderRadius: 8, padding: '8px 12px', fontSize: 12 }}>
+      <div style={{ background: '#1E293B', border: '1px solid #334155', borderRadius: 8, padding: '8px 12px', fontSize: 12 }}>
         <strong style={{ color: theme.colors.azulEscuro }}>{entry?.subregiao}</strong>
         <div>DOI: <strong>{payload[0]?.value} dias</strong></div>
       </div>
@@ -143,7 +143,7 @@ export function RiskSection() {
       <SectionTitle
         number="06"
         title="Análise de Risco e Contingência"
-        sub="Bias de forecast, DOI por sub-região e planos de contingência operacional"
+        sub="Riscos da solução final (Cenário C), bias de forecast e planos de contingência"
       />
 
       <Grid>
@@ -172,7 +172,7 @@ export function RiskSection() {
             </div>
             <ResponsiveContainer width="100%" height={180}>
               <BarChart data={doiSubregioes} layout="vertical" margin={{ top: 0, right: 30, left: 60, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" horizontal={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />
                 <XAxis type="number" domain={[0, 25]} tick={{ fontSize: 10 }} />
                 <YAxis dataKey="subregiao" type="category" tick={{ fontSize: 11, fontWeight: 600 }} width={70} />
                 <Tooltip content={<CustomTooltip />} />
@@ -194,9 +194,9 @@ export function RiskSection() {
         <div>
           <RiskCardGrid>
             <div style={{ fontSize: 12, fontWeight: 700, color: theme.colors.cinzaEscuro, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 4 }}>
-              Risco por Cenário
+              Risco — Solução Final (Cenário C)
             </div>
-            {riskData.map(r => (
+            {riskData.filter(r => r.cenario === 'C').map(r => (
               <RiskCard key={r.cenario}>
                 <RiskHeader>
                   <RiskLabel $color={scenarioColors[r.cenario]}>Cenário {r.cenario}</RiskLabel>

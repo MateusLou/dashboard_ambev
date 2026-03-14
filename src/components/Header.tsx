@@ -3,7 +3,7 @@ import { theme } from '../styles/theme';
 
 const HeaderWrapper = styled.header`
   background: ${theme.gradients.header};
-  color: ${theme.colors.branco};
+  color: ${theme.colors.preto};
   padding: ${theme.spacing.lg} ${theme.spacing.xl};
   box-shadow: ${theme.shadows.header};
   display: flex;
@@ -92,11 +92,11 @@ export function Header() {
       </TitleBlock>
       <BadgeGroup>
         <Badge>
-          <span className="val">4.500 HL</span>
+          <span className="val">11.680 HL</span>
           <span className="lbl">Gap Demanda</span>
         </Badge>
         <Badge>
-          <span className="val">R$ 459K</span>
+          <span className="val">R$ 382K</span>
           <span className="lbl">Budget (C)</span>
         </Badge>
         <Badge>
@@ -104,8 +104,8 @@ export function Header() {
           <span className="lbl">Lead Time</span>
         </Badge>
         <Badge>
-          <span className="val">✓ Seguro</span>
-          <span className="lbl">DOI NENO</span>
+          <span className="val">8.6/10</span>
+          <span className="lbl">Score Cen. C</span>
         </Badge>
       </BadgeGroup>
     </HeaderWrapper>

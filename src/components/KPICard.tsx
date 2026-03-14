@@ -4,9 +4,9 @@ import { useCountUp } from '../hooks/useCountUp';
 import type { KPI } from '../data/caseData';
 
 const colorMap: Record<string, string> = {
-  vermelho: theme.colors.vermelho,
-  ambar: theme.colors.ambar,
-  verde: theme.colors.verde,
+  vermelho: theme.colors.danger,
+  ambar: theme.colors.warning,
+  verde: theme.colors.success,
   azul: theme.colors.azulEscuro,
 };
 

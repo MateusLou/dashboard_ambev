@@ -93,7 +93,7 @@ const AcaoCard = styled.div`
   gap: 12px;
   align-items: flex-start;
   padding: 10px 0;
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: 1px solid ${theme.colors.cinzaMedio};
 
   &:last-child { border-bottom: none; }
 `;
